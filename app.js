@@ -3,7 +3,7 @@
     const handlebars = require('express-handlebars')
     const bodyParser = require('body-parser')
     const app = express()
-    const admin = require("./roots/admin")
+    const admin = require("./routes/admin")
     const path = require("path")
     const mongoose = require('mongoose')
     const session = require("express-session")
@@ -12,6 +12,7 @@
     const Postagem = mongoose.model("postagens")
     require("./models/Categoria")
     const Categoria = mongoose.model("categorias")
+    const usuarios = require("./routes/usuario")
 
 // Configurações
     // Sessão
@@ -108,12 +109,8 @@
         res.send('Error 404!')
     })
 
-    app.get('/posts', (req, res) => {
-        res.send('Posts da área principal')
-    })
-
     app.use('/admin', admin)
-
+    app.use("/usuarios", usuarios)
 
 // Outros
 const PORT = 8081
